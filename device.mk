@@ -23,7 +23,8 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/init.kitakami.rc:root/init.kitakami.rc \
     $(SONY_ROOT)/init.kitakami.usb.rc:root/init.kitakami.usb.rc \
     $(SONY_ROOT)/init.kitakami.pwr.rc:root/init.kitakami.pwr.rc \
-    $(SONY_ROOT)/fstab.kitakami:root/fstab.kitakami \
+    $(SONY_ROOT)/fstab.qcom:root/fstab.qcom \
+    $(SONY_ROOT)/twrp.fstab:root/twrp.fstab \
     $(SONY_ROOT)/ueventd.kitakami.rc:root/ueventd.kitakami.rc \
     $(SONY_ROOT)/system/usr/idc/clearpad.idc:system/usr/idc/clearpad.idc \
     $(SONY_ROOT)/system/usr/idc/touch_fusion.idc:system/usr/idc/touch_fusion.idc \
