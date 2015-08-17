@@ -23,7 +23,7 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/init.kitakami.rc:root/init.kitakami.rc \
     $(SONY_ROOT)/init.kitakami.usb.rc:root/init.kitakami.usb.rc \
     $(SONY_ROOT)/init.kitakami.pwr.rc:root/init.kitakami.pwr.rc \
-    $(SONY_ROOT)/fstab.qcom:root/fstab.qcom \
+    $(SONY_ROOT)/fstab.kitakami:root/fstab.kitakami \
     $(SONY_ROOT)/twrp.fstab:root/twrp.fstab \
     $(SONY_ROOT)/ueventd.kitakami.rc:root/ueventd.kitakami.rc \
     $(SONY_ROOT)/system/usr/idc/clearpad.idc:system/usr/idc/clearpad.idc \
@@ -181,6 +181,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     rmt_storage
 
+#Exfat
+PRODUCT_PACKAGES += \
+    texfat.ko
+
 #Charger
 PRODUCT_PACKAGES += \
     charger_res_images
@@ -222,5 +226,6 @@ $(call add-product-dex-preopt-module-config,services,--compiler-filter=speed)
 #
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
-    persist.data.qmi.adb_logmask=0
+    persist.data.qmi.adb_logmask=0 \
+    ro.secure=0
 

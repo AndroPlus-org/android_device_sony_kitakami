@@ -59,9 +59,9 @@ BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 TARGET_RECOVERY_FSTAB = device/sony/kitakami/rootdir/twrp.fstab
 
-TARGET_SCREEN_HEIGHT := 2560
-TARGET_SCREEN_WIDTH := 1600
-DEVICE_RESOLUTION := 2560x1600
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 800
+DEVICE_RESOLUTION := 1280x800
 
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -86,7 +86,7 @@ TW_CRYPTO_FS_FLAGS := "0x00000406"
 TW_CRYPTO_KEY_LOC := "footer"
 TW_INCLUDE_FUSE_EXFAT := true
 # TW_BOARD_CUSTOM_GRAPHICS := ../../../device/sony/kitakami-common/recovery/twrpgraphics.c
-TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+TW_BRIGHTNESS_PATH := /sys/class/leds/wled/brightness
 TW_MAX_BRIGHTNESS := 4095
 TW_NO_USB_STORAGE := true
 TW_NO_SCREEN_BLANK := true
@@ -149,7 +149,15 @@ ifeq ($(HOST_OS),linux)
 endif
 
 BUILD_KERNEL := true
--include vendor/sony/kernel/KernelConfig.mk
+#-include vendor/sony/kernel/KernelConfig.mk
+TARGET_KERNEL_SOURCE := kernel/sony/msm8994
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_CONFIG := cm_kitakami_karin_defconfig
+TARGET_USES_UNCOMPRESSED_KERNEL := true
+
+BOARD_USES_QC_TIME_SERVICES := true
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
