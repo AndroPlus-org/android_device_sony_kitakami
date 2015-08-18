@@ -59,9 +59,9 @@ BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 TARGET_RECOVERY_FSTAB = device/sony/kitakami/rootdir/twrp.fstab
 
-TARGET_SCREEN_HEIGHT := 1280
-TARGET_SCREEN_WIDTH := 800
-DEVICE_RESOLUTION := 1280x800
+TARGET_SCREEN_HEIGHT := 2560
+TARGET_SCREEN_WIDTH := 1600
+DEVICE_RESOLUTION := 2560x1600
 
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -160,25 +160,6 @@ TARGET_USES_UNCOMPRESSED_KERNEL := true
 BOARD_USES_QC_TIME_SERVICES := true
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
+-include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += \
-    device/sony/kitakami/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-    addrsetup.te \
-    device.te \
-    file.te \
-    property.te \
-    sct.te \
-    sensors.te \
-    service.te \
-    system_app.te \
-    tad.te \
-    ta_qmi.te \
-    thermanager.te \
-    timekeep.te \
-    file_contexts \
-    property_contexts \
-    service_contexts
-
+#BOARD_SEPOLICY_DIRS += device/sony/kitakami/sepolicy

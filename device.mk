@@ -181,10 +181,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     rmt_storage
 
-#Exfat
-PRODUCT_PACKAGES += \
-    texfat.ko
-
 #Charger
 PRODUCT_PACKAGES += \
     charger_res_images
