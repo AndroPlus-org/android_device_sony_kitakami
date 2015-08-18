@@ -19,3 +19,6 @@
 /system/vendor/bin/timekeep                   u:object_r:timekeep_exec:s0
 
 /sys/devices/fb000000.qcom,wcnss-wlan/wcnss_mac_addr    u:object_r:sysfs_addrsetup:s0
+
+/system/vendor/bin/touch_fusion u:object_r:touch_fusion_exec:s0
+/system/bin/touchscreend       u:object_r:touchscreend_exec:s0
