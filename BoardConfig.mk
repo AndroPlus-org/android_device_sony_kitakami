@@ -149,12 +149,12 @@ ifeq ($(HOST_OS),linux)
 endif
 
 BUILD_KERNEL := true
-#-include vendor/sony/kernel/KernelConfig.mk
-TARGET_KERNEL_SOURCE := kernel/sony/msm8994
+-include vendor/sony/kernel/KernelConfig.mk
+TARGET_KERNEL_SOURCE := kernel/sony/msm
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_CONFIG := cm_kitakami_karin_defconfig
+TARGET_KERNEL_CONFIG := aosp_kitakami_karin_defconfig
 TARGET_USES_UNCOMPRESSED_KERNEL := true
 
 BOARD_USES_QC_TIME_SERVICES := true
