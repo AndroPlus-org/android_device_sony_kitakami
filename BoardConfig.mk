@@ -46,7 +46,7 @@ BOARD_CUSTOM_MKBOOTIMG := mkqcdtbootimg
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --dt_dir $(OUT)/dtbs
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=kitakami user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=kitakami user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive androidboot.bootdevice=f9824900.sdhci
 BOARD_KERNEL_CMDLINE += dwc3.maximum_speed=high lpm_levels.sleep_disabled=1 boot_cpus=0-5 dwc3_msm.prop_chg_detect=Y coherent_pool=8M earlyprintk=msm_hsl_uart,0xf991e000
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -63,7 +63,7 @@ TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1600
 DEVICE_RESOLUTION := 2560x1600
 
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 
@@ -76,21 +76,27 @@ TW_FLASH_FROM_STORAGE := true
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_DEFAULT_EXTERNAL_STORAGE := true
-# TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_JB_CRYPTO := true
+TW_INCLUDE_CRYPTO := false
+TW_INCLUDE_JB_CRYPTO := false
 TW_CRYPTO_FS_TYPE := "ext4"
-TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/soc.0/by-name/userdata"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/bootdevice/by-name/userdata"
 TW_CRYPTO_MNT_POINT := "/data"
 TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,barrier=1,noauto_da_alloc,discard"
 TW_CRYPTO_FS_FLAGS := "0x00000406"
 TW_CRYPTO_KEY_LOC := "footer"
 TW_INCLUDE_FUSE_EXFAT := true
 # TW_BOARD_CUSTOM_GRAPHICS := ../../../device/sony/kitakami-common/recovery/twrpgraphics.c
-TW_BRIGHTNESS_PATH := /sys/class/leds/wled/brightness
-TW_MAX_BRIGHTNESS := 4095
+#TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+#TW_MAX_BRIGHTNESS := 4095
 TW_NO_USB_STORAGE := true
 TW_NO_SCREEN_BLANK := true
 #TARGET_USERIMAGES_USE_F2FS := true
+#TW_EXCLUDE_DEFAULT_USB_INIT := true
+#TW_NO_CPU_TEMP := true
+TW_INPUT_BLACKLIST := "accelerometer"
+#TW_NEW_ION_HEAP := true
+#TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
+#TW_SCREEN_BLANK_ON_BOOT := true
 
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
@@ -150,14 +156,12 @@ endif
 
 BUILD_KERNEL := true
 -include vendor/sony/kernel/KernelConfig.mk
-TARGET_KERNEL_SOURCE := kernel/sony/msm
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_CONFIG := aosp_kitakami_karin_defconfig
-TARGET_USES_UNCOMPRESSED_KERNEL := true
-
-BOARD_USES_QC_TIME_SERVICES := true
+#TARGET_KERNEL_SOURCE := kernel/sony/msm
+#TARGET_KERNEL_ARCH := arm64
+#TARGET_KERNEL_HEADER_ARCH := arm64
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+#TARGET_KERNEL_CONFIG := aosp_kitakami_karin_defconfig
+#TARGET_USES_UNCOMPRESSED_KERNEL := true
 
 # SELinux
 -include device/qcom/sepolicy/sepolicy.mk
