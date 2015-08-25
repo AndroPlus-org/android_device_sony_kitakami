@@ -65,10 +65,6 @@ on init
 on fs
     mount_all ./fstab.kitakami
     setprop ro.crypto.fuse_sdcard true
-    
-    chmod 0770 /system/vendor/bin/touch_fusion
-    chmod 0660 /system/vendor/firmware/max11945.bin
-    
     write /sys/kernel/boot_adsp/boot 1
 
 # msm specific files that need to be created on /data
@@ -524,8 +520,3 @@ service timekeep /system/bin/timekeep restore
    group root
    oneshot
 
-service touch_fusion \
-    /vendor/bin/touch_fusion \
-    daemon touch_fusion /system/vendor/etc/touch_fusion_panel_id_0x070C.cfg
-    class main
-    user root
