@@ -24,6 +24,7 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/init.kitakami.usb.rc:root/init.kitakami.usb.rc \
     $(SONY_ROOT)/init.kitakami.pwr.rc:root/init.kitakami.pwr.rc \
     $(SONY_ROOT)/fstab.kitakami:root/fstab.kitakami \
+    $(SONY_ROOT)/twrp.fstab:root/twrp.fstab \
     $(SONY_ROOT)/ueventd.kitakami.rc:root/ueventd.kitakami.rc \
     $(SONY_ROOT)/system/usr/idc/clearpad.idc:system/usr/idc/clearpad.idc \
     $(SONY_ROOT)/system/usr/idc/touch_fusion.idc:system/usr/idc/touch_fusion.idc \
@@ -205,6 +206,10 @@ PRODUCT_COPY_FILES += device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
+
+# TWRP
+PRODUCT_COPY_FILES += \
+    $(SONY_ROOT)/twrp.fstab:recovery/root/etc/twrp.fstab
 
 # ART
 PRODUCT_PROPERTY_OVERRIDES += \

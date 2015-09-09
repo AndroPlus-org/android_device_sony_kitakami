@@ -66,3 +66,6 @@ persist.sys.wfd.virtual=0
 wifi.interface=wlan0
 
 ro.qti.sensors.dpc=true
+
+ro.secure=0
+persist.sys.usb.config=mtp,adb

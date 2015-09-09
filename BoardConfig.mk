@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PRODUCT_VENDOR_KERNEL_HEADERS := device/sony/kitakami/kernel-headers
-
 TARGET_BOARD_PLATFORM := msm8994
 
 TARGET_ARCH := arm64
@@ -62,7 +60,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 24360501248
 BOARD_CACHEIMAGE_PARTITION_SIZE := 209715200
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
-TARGET_RECOVERY_FSTAB = device/sony/kitakami/rootdir/fstab.kitakami
+TARGET_RECOVERY_FSTAB = device/sony/kitakami/rootdir/twrp.fstab
 
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
@@ -146,3 +144,26 @@ BOARD_SEPOLICY_UNION += \
     property_contexts \
     service_contexts
 
+
+RECOVERY_VARIANT=twrp
+DEVICE_RESOLUTION := 1080x1920
+TW_THEME := portrait_hdpi
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+RECOVERY_SDCARD_ON_DATA := true
+TW_HAS_NO_RECOVERY_PARTITION := true
+TW_FLASH_FROM_STORAGE := true
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_INCLUDE_JB_CRYPTO := true
+TW_CRYPTO_FS_TYPE := "ext4"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p42"
+TW_CRYPTO_MNT_POINT := "/data"
+TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,barrier=1,noauto_da_alloc,discard"
+TW_CRYPTO_FS_FLAGS := "0x00000406"
+TW_CRYPTO_KEY_LOC := "footer"
+TW_INCLUDE_FUSE_EXFAT := true
+TW_NO_USB_STORAGE := true
+TW_NO_SCREEN_BLANK := true
