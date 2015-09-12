@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PRODUCT_VENDOR_KERNEL_HEADERS := device/sony/kitakami/kernel-headers
+#PRODUCT_VENDOR_KERNEL_HEADERS := device/sony/kitakami/kernel-headers
 
 TARGET_BOARD_PLATFORM := msm8994
 
@@ -66,7 +66,8 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 
 # TWRP flags
-RECOVERY_VARIANT=twrp
+TARGET_SCREEN_HEIGHT := 2560
+TARGET_SCREEN_WIDTH := 1600
 DEVICE_RESOLUTION := 1600x2560
 TW_THEME := landscape_hdpi
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
@@ -150,31 +151,13 @@ endif
 BUILD_KERNEL := true
 -include vendor/sony/kernel/KernelConfig.mk
 #TARGET_KERNEL_SOURCE := kernel/sony/msm
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_CONFIG := aosp_kitakami_karin_defconfig
-TARGET_USES_UNCOMPRESSED_KERNEL := true
+#TARGET_KERNEL_ARCH := arm64
+#TARGET_KERNEL_HEADER_ARCH := arm64
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+#TARGET_KERNEL_CONFIG := aosp_kitakami_karin_defconfig
+#TARGET_USES_UNCOMPRESSED_KERNEL := true
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
+-include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += \
-    device/sony/kitakami/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-    addrsetup.te \
-    device.te \
-    file.te \
-    property.te \
-    sct.te \
-    sensors.te \
-    service.te \
-    system_app.te \
-    tad.te \
-    ta_qmi.te \
-    thermanager.te \
-    timekeep.te \
-    file_contexts \
-    property_contexts \
-    service_contexts
+#BOARD_SEPOLICY_DIRS += device/sony/kitakami/sepolicy
