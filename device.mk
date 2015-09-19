@@ -175,7 +175,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     timekeep \
     TimeKeep \
-    thermanager \
+#    thermanager \
     macaddrsetup
 
 PRODUCT_PACKAGES += \
