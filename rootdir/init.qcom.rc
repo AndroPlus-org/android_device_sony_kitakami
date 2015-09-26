@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import init.${ro.hardware}.usb.rc
-import init.${ro.hardware}.pwr.rc
+import init.kitakami.usb.rc
+import init.kitakami.pwr.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug

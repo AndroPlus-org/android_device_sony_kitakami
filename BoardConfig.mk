@@ -40,16 +40,21 @@ BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 
 BOARD_KERNEL_BOOTIMG := true
-BOARD_CUSTOM_MKBOOTIMG := mkqcdtbootimg
+#BOARD_CUSTOM_MKBOOTIMG := mkqcdtbootimg
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
-BOARD_MKBOOTIMG_ARGS += --dt_dir $(OUT)/dtbs
+#BOARD_MKBOOTIMG_ARGS += --dt_dir $(OUT)/dtbs
+BOARD_CUSTOM_BOOTIMG_MK := device/sony/kitakami/custombootimg.mk
+BOARD_KERNEL_SEPARATED_DT := true
+BOARD_KERNEL_DTBPAGEESIZE := 2048
 
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_CROSS_COMPILE_PREFIX :=aarch64-linux-android-
 TARGET_USES_UNCOMPRESSED_KERNEL := true
+TARGET_KERNEL_SOURCE := kernel/sony/kitakami
+TARGET_KERNEL_CONFIG := kitakami_defconfig
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=kitakami user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += dwc3.maximum_speed=high lpm_levels.sleep_disabled=1 boot_cpus=0-5 dwc3_msm.prop_chg_detect=Y coherent_pool=8M earlyprintk=msm_hsl_uart,0xf991e000
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -79,7 +84,7 @@ AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 
 USE_DEVICE_SPECIFIC_CAMERA := true
 
-# Wi-Fi definitions for Broadcom solution
+# Wi-Fi definitions for Broadcom solution - NOT CORRECT
 BOARD_WLAN_DEVICE           := bcmdhd
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
@@ -118,8 +123,8 @@ ifeq ($(HOST_OS),linux)
     WITH_DEXPREOPT ?= true
 endif
 
-BUILD_KERNEL := true
--include vendor/sony/kernel/KernelConfig.mk
+#BUILD_KERNEL := true
+#-include vendor/sony/kernel/KernelConfig.mk
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
@@ -167,3 +172,5 @@ TW_CRYPTO_KEY_LOC := "footer"
 TW_INCLUDE_FUSE_EXFAT := true
 TW_NO_USB_STORAGE := true
 TW_NO_SCREEN_BLANK := true
+TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone10/temp
+

@@ -19,13 +19,12 @@ DEVICE_PACKAGE_OVERLAYS += \
 
 SONY_ROOT = device/sony/kitakami/rootdir
 PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/init.recovery.kitakami.rc:root/init.recovery.kitakami.rc \
-    $(SONY_ROOT)/init.kitakami.rc:root/init.kitakami.rc \
-    $(SONY_ROOT)/init.kitakami.usb.rc:root/init.kitakami.usb.rc \
-    $(SONY_ROOT)/init.kitakami.pwr.rc:root/init.kitakami.pwr.rc \
-    $(SONY_ROOT)/fstab.kitakami:root/fstab.kitakami \
+    $(SONY_ROOT)/init.qcom.rc:root/init.qcom.rc \
+    $(SONY_ROOT)/init.qcom.usb.rc:root/init.qcom.usb.rc \
+    $(SONY_ROOT)/init.qcom.pwr.rc:root/init.qcom.pwr.rc \
+    $(SONY_ROOT)/fstab.qcom:root/fstab.qcom \
     $(SONY_ROOT)/twrp.fstab:root/twrp.fstab \
-    $(SONY_ROOT)/ueventd.kitakami.rc:root/ueventd.kitakami.rc \
+    $(SONY_ROOT)/ueventd.qcom.rc:root/ueventd.qcom.rc \
     $(SONY_ROOT)/system/usr/idc/clearpad.idc:system/usr/idc/clearpad.idc \
     $(SONY_ROOT)/system/usr/idc/touch_fusion.idc:system/usr/idc/touch_fusion.idc \
     $(SONY_ROOT)/system/etc/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
@@ -69,6 +68,11 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
+# Recovery
+PRODUCT_PACKAGES += \
+    extract_elf_ramdisk \
+    static_busybox
+        
 # NFC
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/nfcee_access.xml:system/etc/nfcee_access.xml \
@@ -103,7 +107,7 @@ PRODUCT_PACKAGES += \
     libtinyalsa \
     libtinycompress \
     libaudioroute \
-    tinymix \
+    tinymix 
 
 # Audio effects
 PRODUCT_PACKAGES += \
@@ -175,7 +179,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     timekeep \
     TimeKeep \
-#    thermanager \
+    thermanager \
     macaddrsetup
 
 PRODUCT_PACKAGES += \
@@ -206,10 +210,6 @@ PRODUCT_COPY_FILES += device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
-
-# TWRP
-PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/twrp.fstab:recovery/root/etc/twrp.fstab
 
 # ART
 PRODUCT_PROPERTY_OVERRIDES += \
