@@ -8,7 +8,7 @@
 /cache           ext4      /dev/block/platform/soc.0/by-name/cache   
 /external_sd     vfat      /dev/block/mmcblk1p1                           flags=display="Micro SDcard";storage;wipeingui;removable
 /usb-otg         vfat      /dev/block/sda1                                flags=display="USB OTG";storage;wipeingui;removable
-/firmware        vfat      /dev/block/platform/soc.0/by-name/modem        flags-display="Firmware";backup=1
+/firmware        vfat      /dev/block/platform/soc.0/by-name/modem        flags=display="Firmware";backup=1
 /appslog         ext4      /dev/block/platform/soc.0/by-name/apps_log     flags=display="AppsLog";backup=1;usermrf
 /oem             ext4      /dev/block/platform/soc.0/by-name/oem          flags=display="OEM";backup=1;
 /persist         ext4      /dev/block/platform/soc.0/by-name/persist      flags=display="Persist";backup=1;

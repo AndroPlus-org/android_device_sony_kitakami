@@ -24,5 +24,6 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKIVYBOOTIMG) $(INSTALLED_DTIMAGE_TARGET) \
 	$(recovery_ramdisk) \
 	$(recovery_kernel) 
 	@echo -e ${CL_CYN}"----- Making recovery image ------"${CL_RST}
+	$(call pretty,"pagesize: $(BOARD_KERNEL_PAGESIZE)")
 	$(hide) $(MKIVYBOOTIMG) --kernel $(PRODUCT_OUT)/kernel --ramdisk $(PRODUCT_OUT)/ramdisk-recovery.img --cmdline "$(BOARD_KERNEL_CMDLINE)" --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) --dt $(INSTALLED_DTIMAGE_TARGET) $(BOARD_MKBOOTIMG_ARGS) -o $(INSTALLED_RECOVERYIMAGE_TARGET)
 	@echo -e ${CL_CYN}"----- Made recovery image ----- "${CL_RST}

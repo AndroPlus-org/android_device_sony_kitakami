@@ -69,3 +69,6 @@ ro.qti.sensors.dpc=true
 
 ro.secure=0
 persist.sys.usb.config=mtp,adb
+
+sys.charger_plugged=0
+sys.lcd_fpks=60000
