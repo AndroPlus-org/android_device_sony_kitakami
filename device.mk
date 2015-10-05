@@ -33,7 +33,8 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
     $(SONY_ROOT)/system/etc/sensors_settings:system/etc/sensors_settings \
     $(SONY_ROOT)/system/etc/sec_config:system/etc/sec_config \
-    $(SONY_ROOT)/system/etc/gps.conf:system/etc/gps.conf
+    $(SONY_ROOT)/system/etc/gps.conf:system/etc/gps.conf \
+    $(SONY_ROOT)/system/vendor/firmware/max11945.bin:root/vendor/firmware/max11945.bin
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \

@@ -55,7 +55,7 @@ TARGET_KERNEL_SOURCE := kernel/sony/kitakami
 TARGET_KERNEL_CONFIG := kitakami_defconfig
 
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += dwc3.maximum_speed=high lpm_levels.sleep_disabled=1 boot_cpus=0-5 dwc3_msm.prop_chg_detect=Y coherent_pool=8M earlyprintk=msm_hsl_uart,0xf991e000
+BOARD_KERNEL_CMDLINE += dwc3.maximum_speed=high lpm_levels.sleep_disabled=1 boot_cpus=0-5 dwc3_msm.prop_chg_detect=Y coherent_pool=2M earlyprintk=msm_hsl_uart,0xf991e000
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -149,9 +149,10 @@ BOARD_SEPOLICY_UNION += \
     property_contexts \
     service_contexts
 
-
 RECOVERY_VARIANT=twrp
-DEVICE_RESOLUTION := 1080x1920
+TARGET_SCREEN_HEIGHT := 2560
+TARGET_SCREEN_WIDTH := 1600
+DEVICE_RESOLUTION := 2560x1600
 TW_THEME := landscape_hdpi
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
@@ -170,10 +171,13 @@ TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,barrier=1,noauto_da_alloc,discard"
 TW_CRYPTO_FS_FLAGS := "0x00000406"
 TW_CRYPTO_KEY_LOC := "footer"
 TW_INCLUDE_FUSE_EXFAT := true
-TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
-TW_MAX_BRIGHTNESS := 4095
 TW_NO_USB_STORAGE := true
 TW_NO_SCREEN_BLANK := true
 TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone10/temp
 
-TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
+TW_IGNORE_ABS_MT_TRACKING_ID := true
+TARGET_CPU_CORTEX_A53 := true
+TW_NEVER_UNMOUNT_SYSTEM := true

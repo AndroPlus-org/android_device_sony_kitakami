@@ -72,3 +72,5 @@ persist.sys.usb.config=mtp,adb
 
 sys.charger_plugged=0
 sys.lcd_fpks=60000
+service.pad1.control.start=pad1_on
+service.pad2.control.start=pad2_on
