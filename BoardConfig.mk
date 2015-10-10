@@ -51,7 +51,7 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_USES_UNCOMPRESSED_KERNEL := true
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=kitakami user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += dwc3.maximum_speed=high lpm_levels.sleep_disabled=1 boot_cpus=0-5 dwc3_msm.prop_chg_detect=Y coherent_pool=8M earlyprintk=msm_hsl_uart,0xf991e000
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -62,7 +62,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 24360501248
 BOARD_CACHEIMAGE_PARTITION_SIZE := 209715200
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
-TARGET_RECOVERY_FSTAB = device/sony/kitakami/rootdir/fstab.kitakami
+TARGET_RECOVERY_FSTAB = device/sony/kitakami/rootdir/twrp.fstab
 
 # GFX
 USE_OPENGL_RENDERER := true
@@ -131,3 +131,36 @@ BUILD_KERNEL := true
 -include device/qcom/sepolicy/sepolicy.mk
 
 #BOARD_SEPOLICY_DIRS += device/sony/kitakami/sepolicy
+
+RECOVERY_VARIANT=twrp
+TARGET_SCREEN_HEIGHT := 2560
+TARGET_SCREEN_WIDTH := 1600
+DEVICE_RESOLUTION := 2560x1600
+TW_THEME := landscape_hdpi
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+RECOVERY_SDCARD_ON_DATA := true
+TW_HAS_NO_RECOVERY_PARTITION := true
+TW_FLASH_FROM_STORAGE := true
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_INCLUDE_JB_CRYPTO := true
+TW_CRYPTO_FS_TYPE := "ext4"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p43"
+TW_CRYPTO_MNT_POINT := "/data"
+TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,barrier=1,noauto_da_alloc,discard"
+TW_CRYPTO_FS_FLAGS := "0x00000406"
+TW_CRYPTO_KEY_LOC := "footer"
+TW_INCLUDE_FUSE_EXFAT := true
+TW_NO_USB_STORAGE := true
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+TW_MAX_BRIGHTNESS := 4095
+TW_NO_SCREEN_BLANK := true
+TW_IGNORE_ABS_MT_TRACKING_ID := true
+TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone10/temp
+
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
+TARGET_CPU_CORTEX_A53 := true
