@@ -51,8 +51,9 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX :=aarch64-linux-android-
 TARGET_USES_UNCOMPRESSED_KERNEL := true
-TARGET_KERNEL_SOURCE := kernel/sony/kitakami
-TARGET_KERNEL_CONFIG := kitakami_defconfig
+# Moved to device specific file
+#TARGET_KERNEL_SOURCE := kernel/sony/kitakami
+#TARGET_KERNEL_CONFIG := kitakami_defconfig
 
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += dwc3.maximum_speed=high lpm_levels.sleep_disabled=1 boot_cpus=0-5 dwc3_msm.prop_chg_detect=Y coherent_pool=2M earlyprintk=msm_hsl_uart,0xf991e000
