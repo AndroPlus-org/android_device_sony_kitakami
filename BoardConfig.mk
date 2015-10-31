@@ -151,10 +151,9 @@ BOARD_SEPOLICY_UNION += \
     service_contexts
 
 RECOVERY_VARIANT=twrp
-TARGET_SCREEN_HEIGHT := 2560
-TARGET_SCREEN_WIDTH := 1600
-DEVICE_RESOLUTION := 2560x1600
-TW_THEME := landscape_hdpi
+
+#TW_THEME should be set in device specific repo
+
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_HAS_NO_RECOVERY_PARTITION := true
@@ -166,20 +165,14 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_INCLUDE_JB_CRYPTO := true
 TW_CRYPTO_FS_TYPE := "ext4"
-TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p43"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/soc.0/by-name/userdata"
 TW_CRYPTO_MNT_POINT := "/data"
 TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,barrier=1,noauto_da_alloc,discard"
 TW_CRYPTO_FS_FLAGS := "0x00000406"
 TW_CRYPTO_KEY_LOC := "footer"
 TW_INCLUDE_FUSE_EXFAT := true
 TW_NO_USB_STORAGE := true
-TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
-TW_MAX_BRIGHTNESS := 4095
 TW_NO_SCREEN_BLANK := true
-TW_IGNORE_ABS_MT_TRACKING_ID := true
-TW_NEVER_UNMOUNT_SYSTEM := true
-TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone10/temp
 
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 TARGET_CPU_CORTEX_A53 := true
