@@ -203,10 +203,6 @@ int main(int argc, char *argv[]) {
                         //fprintf(stderr, "Volume up or down\n");
                         return 42;
                     }
-                    if (event.code == KEY_POWER) {
-                        //fprintf(stderr, "Power\n");
-                        return 26;
-                    }
                     if(event_count && --event_count == 0)
                         return 0;
                 }
