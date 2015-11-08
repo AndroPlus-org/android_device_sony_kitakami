@@ -13,7 +13,7 @@ $(INSTALLED_DTIMAGE_TARGET): $(PRODUCT_OUT)/kernel $(DTBTOOL)
 	@echo -e ${CL_CYN}"----- Made dt image --------"${CL_RST}
 
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKIVYBOOTIMG) $(PRODUCT_OUT)/kernel $(INSTALLED_RAMDISK_TARGET) $(INSTALLED_DTIMAGE_TARGET) $(INTERNAL_BOOTIMAGE_FILES) 
+$(INSTALLED_BOOTIMAGE_TARGET): $(MKIVYBOOTIMG) $(PRODUCT_OUT)/kernel $(INSTALLED_RAMDISK_TARGET) $(PRODUCT_OUT)/utilities/extract_elf_ramdisk $(PRODUCT_OUT)/utilities/keycheck $(INSTALLED_DTIMAGE_TARGET) $(INTERNAL_BOOTIMAGE_FILES) 
 	$(call pretty,"Boot image: $@")
 	$(call append-dtb)
 	$(hide) $(MKIVYBOOTIMG) --kernel $(PRODUCT_OUT)/kernel --ramdisk $(INSTALLED_RAMDISK_TARGET) --cmdline "$(BOARD_KERNEL_CMDLINE)" --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) --dt $(INSTALLED_DTIMAGE_TARGET) $(BOARD_MKBOOTIMG_ARGS) -o $(INSTALLED_BOOTIMAGE_TARGET)
@@ -24,6 +24,5 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKIVYBOOTIMG) $(INSTALLED_DTIMAGE_TARGET) \
 	$(recovery_ramdisk) \
 	$(recovery_kernel) 
 	@echo -e ${CL_CYN}"----- Making recovery image ------"${CL_RST}
-	$(call pretty,"pagesize: $(BOARD_KERNEL_PAGESIZE)")
 	$(hide) $(MKIVYBOOTIMG) --kernel $(PRODUCT_OUT)/kernel --ramdisk $(PRODUCT_OUT)/ramdisk-recovery.img --cmdline "$(BOARD_KERNEL_CMDLINE)" --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) --dt $(INSTALLED_DTIMAGE_TARGET) $(BOARD_MKBOOTIMG_ARGS) -o $(INSTALLED_RECOVERYIMAGE_TARGET)
 	@echo -e ${CL_CYN}"----- Made recovery image ----- "${CL_RST}

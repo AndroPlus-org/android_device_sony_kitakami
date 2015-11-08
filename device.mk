@@ -74,6 +74,10 @@ PRODUCT_PACKAGES += \
     extract_elf_ramdisk \
     static_busybox
         
+# Recovery keycheck
+PRODUCT_PACKAGES += \
+    keycheck
+
 # NFC
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/nfcee_access.xml:system/etc/nfcee_access.xml \
