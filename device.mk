@@ -12,19 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+SONY_ROOT = device/sony/kitakami/rootdir
+
 SOMC_PLATFORM := kitakami
 
 DEVICE_PACKAGE_OVERLAYS += \
     device/sony/kitakami/overlay
 
-SONY_ROOT = device/sony/kitakami/rootdir
 PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/init.qcom.rc:root/init.qcom.rc \
-    $(SONY_ROOT)/init.qcom.usb.rc:root/init.qcom.usb.rc \
-    $(SONY_ROOT)/init.qcom.pwr.rc:root/init.qcom.pwr.rc \
     $(SONY_ROOT)/fstab.qcom:root/fstab.qcom \
     $(SONY_ROOT)/twrp.fstab:root/twrp.fstab \
-    $(SONY_ROOT)/ueventd.qcom.rc:root/ueventd.qcom.rc \
     $(SONY_ROOT)/system/usr/idc/clearpad.idc:system/usr/idc/clearpad.idc \
     $(SONY_ROOT)/system/usr/idc/touch_fusion.idc:system/usr/idc/touch_fusion.idc \
     $(SONY_ROOT)/system/etc/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
@@ -33,8 +30,17 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
     $(SONY_ROOT)/system/etc/sensors_settings:system/etc/sensors_settings \
     $(SONY_ROOT)/system/etc/sec_config:system/etc/sec_config \
-    $(SONY_ROOT)/system/etc/gps.conf:system/etc/gps.conf \
-    $(SONY_ROOT)/system/vendor/firmware/max11945.bin:root/vendor/firmware/max11945.bin
+    $(SONY_ROOT)/system/etc/gps.conf:system/etc/gps.conf
+
+PRODUCT_COPY_FILES += \
+    $(SONY_ROOT)/init.recovery.qcom.rc:root/init.recovery.qcom.rc \
+    $(SONY_ROOT)/init.recovery.qcom.rc:root/init.recovery.qcom64_32.rc \
+    $(SONY_ROOT)/init.qcom.rc:root/init.qcom.rc \
+    $(SONY_ROOT)/init.qcom.rc:root/init.qcom64_32.rc \
+    $(SONY_ROOT)/init.qcom.usb.rc:root/init.qcom.usb.rc \
+    $(SONY_ROOT)/init.qcom.pwr.rc:root/init.qcom.pwr.rc \
+    $(SONY_ROOT)/ueventd.qcom.rc:root/ueventd.qcom.rc \
+    $(SONY_ROOT)/ueventd.qcom.rc:root/ueventd.qcom64_32.rc
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
@@ -57,26 +63,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
+    frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml
 
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(SONY_ROOT)/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
     $(SONY_ROOT)/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(SONY_ROOT)/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
     $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
-
-# Recovery
-PRODUCT_PACKAGES += \
-    extract_elf_ramdisk \
-    static_busybox
-        
-# Recovery keycheck
-PRODUCT_PACKAGES += \
-    keycheck
 
 # NFC
 PRODUCT_COPY_FILES += \
@@ -94,7 +92,7 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/usr/keylayout/synaptics_dsx.kl:system/usr/keylayout/synaptics_dsx.kl \
     $(SONY_ROOT)/system/usr/keylayout/touch_fusion.kl:system/usr/keylayout/touch_fusion.kl
 
-#Audio
+# Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.primary.msm8994 \
@@ -107,12 +105,12 @@ PRODUCT_PACKAGES += \
     libaudioalsa \
     libdiag
 
-# for audio.primary.msm8994
+# For audio.primary.msm8994
 PRODUCT_PACKAGES += \
     libtinyalsa \
     libtinycompress \
     libaudioroute \
-    tinymix 
+    tinymix
 
 # Audio effects
 PRODUCT_PACKAGES += \
@@ -121,7 +119,7 @@ PRODUCT_PACKAGES += \
     libqcomvoiceprocessingdescriptors \
     libqcompostprocbundle
 
-#GFX
+# GFX
 PRODUCT_PACKAGES += \
     copybit.msm8994 \
     gralloc.msm8994 \
@@ -134,7 +132,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libion
 
-#OMX
+# OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libstagefrighthw \
@@ -144,44 +142,52 @@ PRODUCT_PACKAGES += \
     libOmxVdecHevc \
     libOmxVenc
 
+# Lights
 PRODUCT_PACKAGES += \
     lights.kitakami
 
 # NFC packages
-#PRODUCT_PACKAGES += \
-#    com.android.nfc_extras \
-#    NfcNci \
-#    Tag \
-#    nfc_nci.pn54x.default
+PRODUCT_PACKAGES += \
+    com.android.nfc_extras \
+    NfcNci \
+    Tag \
+    nfc_nci.msm8994
 
-#GPS
+# GPS
 PRODUCT_PACKAGES += \
     libloc_api_v02 \
-    libloc_adapter \
     libloc_core \
     libloc_eng \
     libgps.utils \
     gps.msm8994
 
-#WLAN
+# WLAN
 PRODUCT_PACKAGES += \
     p2p_supplicant.conf \
-    gsm_domains.conf \
     dhcpcd.conf \
     hostapd \
     libwpa_client \
     wpa_supplicant \
     wpa_supplicant.conf
 
+#CAMERA
+PRODUCT_PACKAGES += \
+    libmmcamera_interface \
+    libmmjpeg_interface \
+    libqomx_core \
+    camera.msm8994
+
 PRODUCT_PACKAGES += \
     keystore.msm8994
 
+# Misc
 PRODUCT_PACKAGES += \
     libmiscta \
     libta \
     tad_static \
     ta_qmi_service
 
+# OSS
 PRODUCT_PACKAGES += \
     timekeep \
     TimeKeep \
@@ -191,35 +197,40 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     rmt_storage
 
-#Charger
+# Charger
 PRODUCT_PACKAGES += \
     charger_res_images
 
-PRODUCT_PACKAGES += \
-    librs_jni \
-    com.android.future.usb.accessory
-
+# AOSP Packages
 PRODUCT_PACKAGES += \
     InCallUI \
-    Launcher3
+    Launcher3 \
+    messaging
 
 PRODUCT_PACKAGES += \
     libemoji
 
-# Filesystem management tools
+# BoringSSL hacks
 PRODUCT_PACKAGES += \
-    e2fsck
+    libboringssl-compat
 
 # APN list
-PRODUCT_COPY_FILES += device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+PRODUCT_COPY_FILES += \
+    device/sample/etc/old-apns-conf.xml:system/etc/old-apns-conf.xml \
+    device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
 
+# Keyguard
+PRODUCT_PROPERTY_OVERRIDES += \
+    keyguard.no_require_sim=true
+
 # ART
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-filter=speed \
+    dalvik.vm.dex2oat-swap=false \
     dalvik.vm.image-dex2oat-filter=speed
 
 # ART
@@ -229,8 +240,10 @@ PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := \
 $(call add-product-dex-preopt-module-config,services,--compiler-filter=speed)
 
 # Platform specific default properties
-#
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
     persist.data.qmi.adb_logmask=0
 
+# Enable MultiWindow
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.debug.multi_window=true

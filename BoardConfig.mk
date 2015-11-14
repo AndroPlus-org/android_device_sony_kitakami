@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# PRODUCT_VENDOR_KERNEL_HEADERS := device/sony/kitakami/kernel-headers
+
 TARGET_BOARD_PLATFORM := msm8994
 
 TARGET_ARCH := arm64
@@ -51,12 +53,11 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX :=aarch64-linux-android-
 TARGET_USES_UNCOMPRESSED_KERNEL := true
-# Moved to device specific file
-#TARGET_KERNEL_SOURCE := kernel/sony/kitakami
-#TARGET_KERNEL_CONFIG := kitakami_defconfig
+TARGET_KERNEL_SOURCE := kernel/sony/kitakami
+TARGET_KERNEL_CONFIG := twrp_kitakami_defconfig
 
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += dwc3.maximum_speed=high lpm_levels.sleep_disabled=1 boot_cpus=0-5 dwc3_msm.prop_chg_detect=Y coherent_pool=2M earlyprintk=msm_hsl_uart,0xf991e000
+BOARD_KERNEL_CMDLINE += dwc3.maximum_speed=high lpm_levels.sleep_disabled=1 boot_cpus=0-5 dwc3_msm.prop_chg_detect=Y coherent_pool=8M earlyprintk=msm_hsl_uart,0xf991e000
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -68,6 +69,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 TARGET_RECOVERY_FSTAB = device/sony/kitakami/rootdir/twrp.fstab
 
+# GFX
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 TARGET_USES_OVERLAY := true
@@ -83,9 +85,11 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 
+#Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
+BOARD_QTI_CAMERA_32BIT_ONLY := true
 
-# Wi-Fi definitions for Broadcom solution - NOT CORRECT
+# Wi-Fi definitions for Broadcom solution
 BOARD_WLAN_DEVICE           := bcmdhd
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
@@ -105,6 +109,7 @@ BOARD_BLUEDROID_VENDOR_CONF := device/sony/kitakami/bluetooth/vnd_generic.txt
 
 # GPS definitions for Qualcomm solution
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
+BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 TARGET_NO_RPC := true
 
 # Charger
@@ -113,16 +118,10 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 TARGET_SYSTEM_PROP := device/sony/kitakami/system.prop
 
 # NFC
-BOARD_NFC_CHIPSET := pn547
-BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
+NFC_NXP_CHIP_TYPE := PN547C2
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
-
-# Enable dex-preoptimization to speed up first boot sequence
-ifeq ($(HOST_OS),linux)
-    WITH_DEXPREOPT ?= true
-endif
 
 #BUILD_KERNEL := true
 #-include vendor/sony/kernel/KernelConfig.mk
@@ -132,10 +131,8 @@ endif
 
 #BOARD_SEPOLICY_DIRS += device/sony/kitakami/sepolicy
 
+# TWRP
 RECOVERY_VARIANT=twrp
-
-#TW_THEME should be set in device specific repo
-
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_HAS_NO_RECOVERY_PARTITION := true
@@ -147,7 +144,7 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_INCLUDE_JB_CRYPTO := true
 TW_CRYPTO_FS_TYPE := "ext4"
-TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/soc.0/by-name/userdata"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p42"
 TW_CRYPTO_MNT_POINT := "/data"
 TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,barrier=1,noauto_da_alloc,discard"
 TW_CRYPTO_FS_FLAGS := "0x00000406"
@@ -155,6 +152,3 @@ TW_CRYPTO_KEY_LOC := "footer"
 TW_INCLUDE_FUSE_EXFAT := true
 TW_NO_USB_STORAGE := true
 TW_NO_SCREEN_BLANK := true
-
-TARGET_RECOVERY_QCOM_RTC_FIX := true
-TARGET_CPU_CORTEX_A53 := true
