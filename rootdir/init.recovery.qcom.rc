@@ -3,14 +3,13 @@ on boot
     mkdir /dev/block/bootdevice
     symlink /dev/block/platform/soc.0/by-name /dev/block/bootdevice/by-name
     symlink /system/vendor /vendor
-    
-    twrp mount system
 
-    insmod /sbin/core_ctl.ko
-    insmod /sbin/ecryptfs.ko
-    insmod /sbin/kscl.ko
-    insmod /sbin/mhl_sii8620_8061_drv.ko
-    insmod /sbin/texfat.ko
+    #insmod /sbin/core_ctl.ko
+    #insmod /sbin/ecryptfs.ko
+    #insmod /sbin/kscl.ko
+    #insmod /sbin/mhl_sii8620_8061_drv.ko
+    #insmod /sbin/texfat.ko
+    
     write /sys/class/android_usb/android0/idVendor 0FCE
     write /sys/class/android_usb/android0/idProduct 6${ro.usb.pid_suffix}
 
@@ -20,8 +19,4 @@ on boot
     # Configure governor settings for big cluster
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 1248000
-    
-on init
-    mkdir /dev/block/bootdevice
-    symlink /dev/block/platform/soc.0/by-name /dev/block/bootdevice/by-name
-    symlink /system/vendor /vendor
+
